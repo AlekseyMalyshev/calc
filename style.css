@@ -1,0 +1,71 @@
+
+table.calc {
+    background-color: #979797;
+    font-family: Arial, sans-serif;
+    margin: 10px;
+    border: 1px solid #666;
+    border-spacing: 1px;
+    border-radius: 8px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+thead.buf {
+    color: #ffffff;
+    text-align: right;
+    height: 120px;
+}
+
+thead.buf>tr>th {
+    font-size: 36pt;
+    font-weight: 100;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-wrap: none;
+    overflow: hidden;
+}
+
+td.box {
+    background-color: #d0d0d0;
+    font-size: 14pt;
+    height: 47px;
+    width: 56px;
+    margin: 0px;
+    padding: 0px;
+    cursor: default;
+}
+
+td.box:active {
+    background-color: #a09fa0;
+}
+
+td.zero {
+    text-align: left;
+    padding-left: 22px
+}
+
+td.digits {
+    background-color: #dcdcdc;
+    font-size: 16pt;
+}
+
+td.digits:active {
+    background-color: #a9a9a9;
+}
+
+td.ops {
+    background-color: #f6872c;
+    color: #ffffff;
+    font-size: 24pt;
+    font-weight: 100;
+}
+
+td.pushed {
+    height: 45px;
+    width: 54px;
+    border: 1px solid #979797;
+}
+
+td.clicked {
+    cursor: default;
+}
