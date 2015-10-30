@@ -16,6 +16,7 @@
   let $buf = $('th#buf');
 
   let stack = [];
+  let stackCp = [];
 
   let prevNum = () => {
     for (let i = stack.length - 1; i >= 0; --i) {
@@ -48,7 +49,7 @@
   }
 
   let processStack = (op2) => {
-    let top = stack.pop();
+    let top = stackCp.pop();
     switch (top) {
       case '/':
         return processStack() / op2;
@@ -59,7 +60,8 @@
       case '+':
         return processStack() + op2;
       case '=':
-        buf = processStack(stack.pop());
+        buf = processStack(stackCp.pop());
+        stack[0] = buf;
         sep = 0;
         resetBuf = true;
         $buf.text(buf);
@@ -155,7 +157,10 @@
         $buf.text($buf.text() + '.');
         break;
       case 49:
-        processOp('=');
+        if (!resetBuf) {
+          processOp('=');
+        }
+        stackCp = stack.map((v) => { return v; });
         processStack();
         break;
     }
