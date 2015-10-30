@@ -74,6 +74,7 @@
   let processNum = (num) => {
     if (resetBuf) {
       resetBuf = false;
+      stack = [];
       buf = 0;
     }
     if (buf === 0 && !sep) {
