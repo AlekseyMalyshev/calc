@@ -34,8 +34,15 @@
     $buf.text(buf);
   }
 
+  let clearOpButtons = () => {
+    $('td#9').removeClass('pushed');
+    $('td#19').removeClass('pushed');
+    $('td#29').removeClass('pushed');
+    $('td#39').removeClass('pushed');
+  }
+
   let processOp = (op, $btn) => {
-    if (op != '=' && stack.length > 0 &&
+    if (stack.length > 0 &&
         !!~'/*-+'.indexOf(stack[stack.length - 1])) {
       stack.pop();
     }
@@ -45,10 +52,7 @@
     stack.push(op);
     buf = 0;
     sep = 0;
-    $('td#9').removeClass('pushed');
-    $('td#19').removeClass('pushed');
-    $('td#29').removeClass('pushed');
-    $('td#39').removeClass('pushed');
+    clearOpButtons();
     if ($btn !== undefined) {
       $btn.addClass('pushed');
     }
@@ -65,16 +69,22 @@
         return processStack() - op2;
       case '+':
         return processStack() + op2;
-      case '=':
-        buf = processStack(stackCp.pop());
-        stack[0] = buf;
-        sep = 0;
-        resetBuf = true;
-        $buf.text(buf);
-        break;
       default:
         return top;
     }
+  }
+
+  let processResult = () => {
+    clearOpButtons();
+    if (!resetBuf) {
+      stack.push(buf);
+    }
+    stackCp = stack.map((v) => { return v; });
+    buf = processStack(stackCp.pop());
+    stack[0] = buf;
+    sep = 0;
+    resetBuf = true;
+    $buf.text(buf);
   }
 
   let processNum = (num) => {
@@ -164,11 +174,7 @@
         $buf.text($buf.text() + '.');
         break;
       case 49:
-        if (!resetBuf) {
-          processOp('=');
-        }
-        stackCp = stack.map((v) => { return v; });
-        processStack();
+        processResult();
         break;
     }
   }
