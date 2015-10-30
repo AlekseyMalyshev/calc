@@ -10,6 +10,7 @@
   let mem = 0;
   let $mem = $('td#5');
 
+  let resetBuf = false;
   let buf = 0;
   let sep = 0;
   let $buf = $('th#buf');
@@ -30,10 +31,6 @@
     buf = 0;
     sep = 0;
     $buf.text(buf);
-  }
-
-  let setBufText = (num) => {
-    $buf.text(num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
   }
 
   let processOp = (op, $btn) => {
@@ -64,6 +61,7 @@
       case '=':
         buf = processStack(stack.pop());
         sep = 0;
+        resetBuf = true;
         $buf.text(buf);
         break;
       default:
@@ -72,6 +70,10 @@
   }
 
   let processNum = (num) => {
+    if (resetBuf) {
+      resetBuf = false;
+      buf = 0;
+    }
     if (buf === 0 && !sep) {
       buf = num;
     }
@@ -91,26 +93,6 @@
 
   let processKey = ($btn) => {
     switch (parseInt($btn.attr('id'))) {
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        mem = 0;
-        $mem.removeClass('pushed');
-        break;
-      case 3:
-        mem += buf;
-        $mem.addClass('pushed');
-        break;
-      case 4:
-        mem -= buf;
-        $mem.addClass('pushed');
-        break;
-      case 5:
-        buf = mem;
-        $buf.text(buf);
-        break;
       case 6:
         clearBuf();
         stack = [];
@@ -128,18 +110,6 @@
       case 9:
         processOp('/', $btn);
         break;
-      case 10:
-        break;
-      case 11:
-        break;
-      case 12:
-        break;
-      case 13:
-        break;
-      case 14:
-        break;
-      case 15:
-        break;
       case 16:
         processNum(7);
         break;
@@ -151,18 +121,6 @@
         break;
       case 19:
         processOp('*', $btn);
-        break;
-      case 20:
-        break;
-      case 21:
-        break;
-      case 22:
-        break;
-      case 23:
-        break;
-      case 24:
-        break;
-      case 25:
         break;
       case 26:
         processNum(4);
@@ -176,18 +134,6 @@
       case 29:
         processOp('-', $btn);
         break;
-      case 30:
-        break;
-      case 31:
-        break;
-      case 32:
-        break;
-      case 33:
-        break;
-      case 34:
-        break;
-      case 35:
-        break;
       case 36:
         processNum(1);
         break;
@@ -199,18 +145,6 @@
         break;
       case 39:
         processOp('+', $btn);
-        break;
-      case 40:
-        break;
-      case 41:
-        break;
-      case 42:
-        break;
-      case 43:
-        break;
-      case 44:
-        break;
-      case 45:
         break;
       case 46:
         processNum(0);
