@@ -35,7 +35,13 @@
   }
 
   let processOp = (op, $btn) => {
-    stack.push(buf);
+    if (op != '=' && stack.length > 0 &&
+        !!~'/*-+'.indexOf(stack[stack.length - 1])) {
+      stack.pop();
+    }
+    else {
+      stack.push(buf);
+    }
     stack.push(op);
     buf = 0;
     sep = 0;
