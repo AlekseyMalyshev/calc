@@ -36,7 +36,7 @@ td.box {
 }
 
 td.box:active {
-    background-color: #a09fa0;
+    background-color: #a9a9a9;
 }
 
 td.zero {
@@ -45,19 +45,23 @@ td.zero {
 }
 
 td.digits {
-    background-color: #dcdcdc;
+    background-color: #e0e0e0;
     font-size: 16pt;
 }
 
 td.digits:active {
-    background-color: #a9a9a9;
+    background-color: #b2b2b2;
 }
 
 td.ops {
-    background-color: #f6872c;
+    background-color: #ff8d00;
     color: #ffffff;
     font-size: 24pt;
     font-weight: 100;
+}
+
+td.ops:active {
+    background-color: #d16f00;
 }
 
 td.pushed {
